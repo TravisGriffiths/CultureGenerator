@@ -24,6 +24,250 @@
 
       const getScore = () => (roll() + roll() + roll() - 2)
 
+      const getClericDomains = (culture) => {
+
+      }
+
+      const scoreToKey = (score) => {
+        if(score < 3) {
+          return 'extremeLow'
+        } else if(score === 3) {
+          return 'veryLow'
+        } else if(score == 4) {
+          return 'low'
+        } else if(score === 5 || score === 6) {
+          return 'average'
+        } else if(score === 7) {
+          return 'high'
+        } else if(score === 8) {
+          return 'veryHigh'
+        } else {
+          return 'extremeHigh'
+        }
+      }
+
+      const religiousText = {
+        extremeLow: `Religion is largely invisible in this society and is unlikely
+        to very from individual to individual even inside the same family. Beliefs
+        are personal things that don't leak out to the broader society in any
+        organized way.`,
+        veryLow: `Religion is only very informally and lightly organized. Churches
+        are fluid and do not define members in much more than a very passive way.`,
+        low: `Churches and religions are fragmented without any stong centralization
+        or dominance in daily life for most people. There are likely many tiny
+        churches throughout society without any having dominance or much political
+        power.`,
+        average: `People generally have a religion and a small number of churches
+        hold sway over the majority of the population. A person's choice of faith
+        is important, and probably assumed, but not all consuming.`,
+        high: `Religion is very central to personal identity and only one or a tiny
+        collection of churches wield outsized political and social power.`,
+        veryHigh: `This culture is likely to form de facto or de jure theocracies
+        likely of a single faith. All members of society are expected to take part in
+        services and belief structures.`,
+        extremeHigh: `This culture is almost certainly a theocracy with a single
+        church totally dominiating society. Even the idea that an individual
+        might choose a different faith is likely unimaginable.`
+      }
+
+      const getReligiousText = (score) => religiousText[scoreToKey(score)]
+
+      const academicText = {
+        extremeLow: `This culture is actively hostile to the idea of inquiry
+        and even to recording and remembering events. The ways of life and
+        technologies in use are likely to remain for generations without even
+        minor change.`,
+        veryLow: `This culture shuns inquery beliving that everything needed is
+        known, and possibly that questioning current norms is somehow heretical.
+        There is probably some method and level of recording and remembring
+        basic events, most likely oral tradition.`,
+        low: `This culture has basic record keeping, oral, but possibly some
+        other longer lived mechanisms. Research, and inquery are likely limited
+        to driven individuals willing to accept the social ostrasism that such
+        pursuits entail in this culture.`,
+        average: `Permanent records exist, but are not commonly available to the
+         public. Segments of the population work to discover new things, but
+         these are limited to a small and dedicated group.`,
+        high: `Permanent records exists, and are mostly publicly available.
+        Education in general is common to most members of this culture, and it
+        is not uncommon for an individual to dedicate significant time and
+        energy to research and inquery.`,
+        veryHigh: `Education at some level is almost ubuiquitous. Individuals
+        showing levels of interest and talent are likely to continue deeper
+        research for years, if not decades. Universites, libraries and similar
+        are common and have outsized social influence.`,
+        extremeHigh: `Education is likely mandatory for all citizens of this
+        culture. Libraries and universities are common and dominant civil
+        structures with immense social and political power. Individuals are
+        likely to have records and research materials of some kind in private
+        homes. Scholars, librarians, and record keepers are persons of high
+        reguard and power.`
+      }
+
+      const getAcademicText = (score) => academicText[scoreToKey(score)]
+
+      const martialText = {
+        extremeLow: `Martial accomplishment is actively discouraged in such a
+        culture. Internal and external conflict is resolved entirely by means
+        other than combat in this culture.`,
+        veryLow: `Martial accomplishment is discounted and likely deligated to
+        a lower class or even enslaved group. Combat and warfare are defensive
+        only while other mechanisms are likely used for defense.`,
+        low: `Warriors and soldiers exist, but are considered to be lower class
+        in general. Warfare is defensive only.`,
+        average: `Warriors and soldiers are considered to have jobs roughly
+        equivalent to any other trade. There are likely to be martial traditions
+        within these groups and units. Warfare might be either offensive or
+        defensive.`,
+        high: `Martial accomplishment is socially elevated. Warriors are seen as
+        better than common folk. Internal and external conflict and wars are
+        common. Most members of this culture are likely to spend some time in a
+        military unit.`,
+        veryHigh: `Combat and warfare is one of the primary paths to political
+        power and social capital. Warriors are considered socially far superior
+        to most citizens. War and conflict are almost constant. Military service
+        is likely long or even constant for most people.`,
+        extremeHigh: `War is the primary occupation of most members of this
+        culture with all other pursuits focused on improving or enabling the
+        society to maintain soldiers, wars and win conflicts. Accomplished
+        warriors are socially the most respected members of society, while those
+        who have never fought or killed an enemy are likely to be relegated to
+        an inferior social class.`
+      }
+
+      const getMartialText = (score) => martialText[scoreToKey(score)]
+
+      const natureText = {
+        extremeLow: `Nature is not seen as a force or anything more than
+        something to be overcome and conquered. This culture is entirely
+        exploitative in its outlook.`,
+        veryLow: `Nature is only taken into consideration mostly for longer
+        term exploitation of resources like soil or forestry are concerned.
+        There is no value in the natural world outside of what it can provide.`,
+        low: `Very small consideration is given to maintaining natural resources
+        on a long term basis. Gardens and pets are very rare.`,
+        average: `Individuals working with natural resources are likely to give
+        serious thought to how to best manage and preserve these resources long
+        term. Natural places are valued for beauty and some people are likely to
+        have gardens, or decorative plants or pet animals.`,
+        high: `The natural world is valued for itself. Most individuals have
+        housing situations integrating some natural or greenspace or take care
+        of some pets/livestock. Long term sustainability of any resource
+        exploitation is given serious thought. Religion might partially be
+        provided by Druids rather than normal clerics.`,
+        veryHigh: `Nature is considered primary. Member of this culture likely
+        see themselves are just another species in the environment. Natural
+        elements pervade most architecture and living spaces. Druids are
+        individuals of central social importance.`,
+        extremeHigh: `Individuals of this culture likely think of themselves as
+        full servants and protectors of the natural world. Most living space
+        will be fully sustainable and part of the living environment. While
+        livestock and meat eating is possible, it is painstakingly wound up in
+        the sustainable lifecycle of any prey species. This is for all intents
+        and purposes a Druidic theocracy.`,
+      }
+
+      const getNatureText = (score) => natureText[scoreToKey(score)]
+
+      const egalitarianText = {
+        extremeLow: `There is a vast chasm between those at the top and those
+        at the bottom of this culture. Most likely those at the top of society
+        use up significantly more than half of all resources while those at the
+        bottom routinely die from lack of food, water or shelter, and are likely
+        to be fully enslaved.`,
+        veryLow: `The difference between the top and bottom of this culture is
+        very wide, with large portions of resources going to the general upper
+        eschelons of society. The bottom classes are likely to have just enough
+        to survive and very few rights.`,
+        low: `Upper classes use most resources. Lower classes in this culture
+        have only minimum extra resources to use, but do have some limited
+        rights and capital.`,
+        average: `There is significant distance between the social upper and
+        lower classes. Lower classes still have some clout and resources in
+        aggregate. `,
+        high: `There is some distance between the upper and lower classes, but
+        largely the distribution is more in social deference rather than purely
+        in resources.`,
+        veryHigh: `There is minimal distance between the very highest and lowest
+        classes. Resources are largely evenly distributed to all individuals.`,
+        extremeHigh: `Resources and social status are almost entirely evenly
+        given to all members of this culture.`
+      }
+
+      const getEgalitarianText = (score) => egalitarianText[scoreToKey(score)]
+
+      const mobilityText = {
+        extremeLow: `Movement out of a social class is impossible, and just the
+        thought is likely to have harsh consequences.`,
+        veryLow: `Only in the rarest of extraordinary circumstanse is anyone
+        able to change social class.`,
+        low: `Social class is mostly inherited for life, but sometimes a person
+        might manage to move a single level during their lives.`,
+        average: `Hard work and dedication allows many people to move a single
+        level, and occasionally two in the social order.`,
+        high: `Most people are likely to change thier social class during thier
+        lifetime.`,
+        veryHigh: `Maintaining a particular social class without changing
+        multiple times during a person's lifetime is quite difficult.`,
+        extremeHigh: `Changing social class is very common within any particular
+        year, let alone lifetime. Moving both up and down is exceedingly common
+        for everyone.`
+      }
+
+      const getMobilityText = (score) => mobilityText[scoreToKey(score)]
+
+      const propertyText = {
+        extremeLow: `Property is just not a concept in this culture. Any money
+        or things that are owned are only in terms of favors or social
+        obligations.`,
+        veryLow: `Personal property particularly items made by an individual are
+        recognized in this culture. Theft is largely impossible or pointless.`,
+        low: `Items within a dwelling are recognized as property. Money systems
+        and actual theft are possible. `,
+        average: `Land ownership is recognized. Theft is both possible and
+        punished. Full money systems are likely.`,
+        high: `Most activity revolves around wages, debt and property. Penalties
+        for theft and non-payment of debts is harsh.`,
+        veryHigh: `Slavery, both chattel and debt is likely recognized in this
+        culture. Extreme punishments like execution for petty theft is also
+        possible.`,
+        extremeHigh: `Most social interactions in this society are within the
+        framework of ownership and debt. People and whole social classes are
+        likely thought of as property of others. Even ideas, names, children,
+        and relationships can be bought and sold.`,
+      }
+
+      const getPropertyText = (score) => propertyText[scoreToKey(score)]
+
+      const lifeText = {
+        extremeLow: `Life is simply not a value for this culture. Individuals
+        are unlikely to die of natural causes as some form of capital punishment,
+        combat or ritual suicide are what kills most individuals.`,
+        veryLow: `Life is of little value to this culture. There is likely an
+        exemption for children, but adults, particularly lower classes are
+        simply expendable in war, conflict or just as a resource. Capital
+        punishment, gladiatorial combat and dueling is exceedingly common.`,
+        low: `Life has a very low value in this culture. People without value as
+        high status individuals are largely disposable. Dueling, conscription,
+        capital punishments or suicide are likely common.`,
+        average: `Life is important but not sancrosanct in this culture. Heinous
+        crimes probably still have a death penalty, and dueling and suicide migh
+        happen, but are rare.`,
+        high: `Life is precious to this culture. Capital punishment is unlikely
+        to exist and dueling is almost certainly banned. Warfare even if it
+        exists will be focused on tactics and strategy to preserve soldiers lives.`,
+        veryHigh: `Life is sacred to this culture. Capitol punishment is certainly
+        banned, along with dueling. Warfare is limited, defensive only or possibly
+        ritualized. Suicide is unknown and unthinkable.`,
+        extremeHigh: `Life is paramount to this culture. There is no capital
+        punishment, no dueling and likely very little murder. Conflict in
+        general is almost certainly some form of ritual or negotiation. Cultures
+        at this level are even likely to make every attempt to preserve the
+        lives of invading soldiers when fighting defensive wars.`,
+      }
+
+      const getLifeText = (score) => lifeText[scoreToKey(score)]
+
       const marriageTraits = {
         1: "Leverite Marriage",
         2: "Sororite Marriage",
@@ -32,6 +276,7 @@
         5: "Dowry",
         6: "Ghost Marriage",
         7: "Same Sex",
+        8: "Temporary",
       }
 
       const exclusiveTrait = {
@@ -42,7 +287,7 @@
       }
 
       const getMarriageTrait = (traits) => {
-        const newTrait = marriageTraits[Math.ceil(Math.random() * 7)];
+        const newTrait = marriageTraits[Math.ceil(Math.random() * 8)];
         if(
           _.findIndex(traits, (t) => t === newTrait) >= 0 ||
           _.findIndex(traits, (t) => exclusiveTrait[newTrait]) >= 0
@@ -80,6 +325,32 @@
           return "Polyandry"
         } else {
           return "Polygynandry"
+        }
+      }
+
+      const getIneritenceType = () => {
+        const inheritenceScore = getScore();
+        if(inheritenceScore < 6) {
+          return "Primogeneture"
+        } else if(inheritenceScore < 8) {
+          return "Partible"
+        } else {
+          return "Ultimogeneture"
+        }
+      }
+
+      const getIneritenceEligibility = () => {
+        const eligibilityScore = getScore()
+        if(eligibilityScore < 5) {
+          return 'agnatic'
+        } else if(eligibilityScore < 7) {
+          return 'agnatic-cognatic'
+        } else if(eligibilityScore === 7) {
+          return 'cognatic'
+        } else if(eligibilityScore === 8) {
+          return 'enatic-cognatic'
+        } else {
+          return 'enatic'
         }
       }
 
@@ -147,6 +418,10 @@
         marriage: {
           type: getMarriageType(getScore()),
           traits: getMarriageTraits()
+        },
+        inheritence: {
+          type: getIneritenceType(),
+          eligibility: getIneritenceEligibility()
         }
       })
 
@@ -174,6 +449,16 @@
             { marriage.traits.map((t) => (<div>{t}</div>))}
           </div>
 
+        )
+      }
+
+      const Inheritence = (props) => {
+        const inheritence = props.stats
+        return (
+          <div>
+            <h5>Inheritence Tradition: {inheritence.type}</h5>
+            <div>Eligibility: {inheritence.eligibility}</div>
+          </div>
         )
       }
 
@@ -212,7 +497,42 @@
               </tr>
             </table>
             <section>
+              <h5>Religion</h5>
+              <div>{getReligiousText(culture.religion.score)}</div>
+            </section>
+            <section>
+              <h5>Academic</h5>
+              <div>{getAcademicText(culture.academic.score)}</div>
+            </section>
+            <section>
+              <h5>Martial</h5>
+              <div>{getMartialText(culture.martial.score)}</div>
+            </section>
+            <section>
+              <h5>Nature</h5>
+              <div>{getNatureText(culture.natural.score)}</div>
+            </section>
+            <section>
+              <h5>Egalitarian</h5>
+              <div>{getEgalitarianText(culture.egalitarian.score)}</div>
+            </section>
+            <section>
+              <h5>Social Mobility</h5>
+              <div>{getMobilityText(culture.mobility.score)}</div>
+            </section>
+            <section>
+              <h5>Property</h5>
+              <div>{getPropertyText(culture.property.score)}</div>
+            </section>
+            <section>
+              <h5>Life</h5>
+              <div>{getLifeText(culture.life.score)}</div>
+            </section>
+            <section>
               <Marriage stats={culture.marriage} />
+            </section>
+            <section>
+              <Inheritence stats={culture.inheritence} />
             </section>
           </div>
         )
