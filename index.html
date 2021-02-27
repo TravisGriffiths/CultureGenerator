@@ -1,0 +1,240 @@
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <!-- React -->
+    <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <!-- JSX -->
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
+    <!-- LoDash -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.15/lodash.min.js" integrity="sha256-VeNaFBVDhoX3H+gJ37DpT/nTuZTdjYro9yBruHjVmoQ=" crossorigin="anonymous"></script>
+
+
+    <!-- Materialize -->
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+
+    <script type="text/babel">
+
+      const roll = () => Math.ceil(Math.random() * 4)
+
+      const getScore = () => (roll() + roll() + roll() - 2)
+
+      const marriageTraits = {
+        1: "Leverite Marriage",
+        2: "Sororite Marriage",
+        3: "Concubinage",
+        4: "Bride Price",
+        5: "Dowry",
+        6: "Ghost Marriage",
+        7: "Same Sex",
+      }
+
+      const exclusiveTrait = {
+        "Leverite Marriage": "Sororite Marriage",
+        "Sororite": "Leverite",
+        "Bride Price": "Dowry",
+        "Dowry": "Bride Price",
+      }
+
+      const getMarriageTrait = (traits) => {
+        const newTrait = marriageTraits[Math.ceil(Math.random() * 7)];
+        if(
+          _.findIndex(traits, (t) => t === newTrait) >= 0 ||
+          _.findIndex(traits, (t) => exclusiveTrait[newTrait]) >= 0
+          ) {
+          return getMarriageTrait(traits)
+        } else {
+          return newTrait
+        }
+      }
+
+      const getMarriageTraits = () => {
+        const traits = []
+        const traitNumber = getScore()
+        if(traitNumber < 5) {
+          return traits
+        } else if(traitNumber < 7) {
+          traits.push(getMarriageTrait(traits))
+        } else if(traitNumber < 9) {
+          traits.push(getMarriageTrait(traits))
+          traits.push(getMarriageTrait(traits))
+        } else {
+          traits.push(getMarriageTrait(traits))
+          traits.push(getMarriageTrait(traits))
+          traits.push(getMarriageTrait(traits))
+        }
+        return traits
+      }
+
+      const getMarriageType = (score) => {
+        if(score < 6) {
+          return "Monogamy"
+        } else if(score === 6) {
+          return "Polygyny"
+        } else if(score < 9) {
+          return "Polyandry"
+        } else {
+          return "Polygynandry"
+        }
+      }
+
+      const strScore = {
+        extremeLow: "Extremely Low",
+        veryLow: "Very Low",
+        low: "Low",
+        average: "Average",
+        high: "High",
+        veryHigh: "Very High",
+        extremeHigh: "Extremely High"
+      }
+
+      const stringRating = (score) => {
+        if(score < 3) {
+          return strScore.extremeLow;
+        } else if(score === 3) {
+          return strScore.veryLow;
+        } else if(score == 4) {
+          return strScore.low;
+        } else if(score === 5 || score === 6) {
+          return strScore.average;
+        } else if(score === 7) {
+          return strScore.high;
+        } else if(score === 8) {
+          return strScore.veryHigh;
+        } else {
+          return strScore.extremeHigh
+        }
+      }
+
+      const getCulture = () => ({
+        religion: {
+          name: 'Religion',
+          score: getScore()
+        },
+        academic: {
+          name: 'Academic',
+          score: getScore()
+        },
+        martial: {
+          name: 'Martial',
+          score: getScore()
+        },
+        natural: {
+          name: 'Nature',
+          score: getScore()
+        },
+        egalitarian: {
+          name: 'Egalitarian',
+          score: getScore()
+        },
+        mobility: {
+          name: 'Social Mobility',
+          score: getScore()
+        },
+        property: {
+          name: 'Property',
+          score: getScore()
+        },
+        life: {
+          name: 'Life',
+          score: getScore()
+        },
+        marriage: {
+          type: getMarriageType(getScore()),
+          traits: getMarriageTraits()
+        }
+      })
+
+      const Stat = (props) => {
+        return (
+         <div>
+           <div>
+             {props.stats.name}
+           </div>
+           <div>
+             {stringRating(props.stats.score)}
+           </div>
+         </div>
+
+        )
+      }
+
+      const Marriage = (props) => {
+        const marriage = props.stats;
+        const traitsTitleStr = "Traits: "
+        return (
+          <div>
+            <h5>Dominant Marriage Type: { marriage.type }</h5>
+            { marriage.traits.length ? (<h6>{traitsTitleStr}</h6>) : null }
+            { marriage.traits.map((t) => (<div>{t}</div>))}
+          </div>
+
+        )
+      }
+
+      const CultureApp = (props) => {
+        let culture = getCulture()
+        return (
+          <div>
+            <table>
+              <tr>
+                <td>
+                  <Stat stats={culture.religion} />
+                </td>
+                <td>
+                  <Stat stats={culture.academic} />
+                </td>
+                <td>
+                  <Stat stats={culture.martial} />
+                </td>
+
+                <td>
+                  <Stat stats={culture.natural} />
+                </td>
+                <td>
+                  <Stat stats={culture.egalitarian} />
+                </td>
+                <td>
+                  <Stat stats={culture.mobility} />
+                </td>
+
+                <td>
+                  <Stat stats={culture.property} />
+                </td>
+                <td>
+                  <Stat stats={culture.life} />
+                </td>
+              </tr>
+            </table>
+            <section>
+              <Marriage stats={culture.marriage} />
+            </section>
+          </div>
+        )
+      }
+
+      ReactDOM.render(<CultureApp />, document.getElementById('cultureApp'))
+
+    </script>
+
+    <style>
+      body {
+        margin: 2em;
+      }
+    </style>
+
+    <title>React Hack</title>
+
+  </head>
+  <body>
+    This is a random culture
+    <div id="cultureApp"></div>
+
+
+  </body>
+</html>
